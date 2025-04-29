@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OpenHAB SSE Test</title>
+</head>
+<body>
+  <h2>OpenHAB Events</h2>
+  <pre id="log"></pre>
+
+  <script>
+    const username = "openhab";
+    const password = "habopen";
+    const itemName = "*";
+
+    const url = `http://${username}:${password}@127.0.0.1:8080/rest/events?topics=openhab/items/${itemName}/state`;
+
+    console.log(url)
+
+    const log = document.getElementById("log");
+
+    const eventSource = new EventSource(url);
+
+    console.log(eventSource)
+
+    eventSource.onmessage = function(event) {
+      log.textContent += "Received: " + event.data + "\n";
+    };
+
+    eventSource.onerror = function(err) {
+      log.textContent += "Error: " + JSON.stringify(err) + "\n";
+    };
+  </script>
+</body>
+</html>
