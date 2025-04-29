@@ -8,11 +8,13 @@
   <pre id="log"></pre>
 
   <script>
+    const baseUrl = "127.0.0.1:8080";
     const username = "openhab";
     const password = "habopen";
     const itemName = "*";
+    const event = `openhab/items/${itemName}/state`
 
-    const url = `http://${username}:${password}@127.0.0.1:8080/rest/events?topics=openhab/items/${itemName}/state`;
+    const url = `http://${username}:${password}@${baseUrl}/rest/events?topics=${event}`;
 
     console.log(url)
 
